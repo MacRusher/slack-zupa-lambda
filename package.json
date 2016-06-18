@@ -2,11 +2,26 @@
   "name": "zupa",
   "private": true,
   "version": "1.0.0",
-  "description": "Lambda function for Slack \"zupa\" command",
-  "main": "index.js",
+  "description": "Lambda function for Slack /zupa command",
   "scripts": {
-    "deploy": "aws lambda update-function-code --function-name \"zupa\" --zip-file fileb://./zupa.zip"
+    "prebuild": "rm -r dist",
+    "build": "babel lib -d dist",
+    "predeploy": "npm i && npm run build",
+    "deploy": "npm run deploy:zip && npm run deploy:push",
+    "deploy:zip": "zip -r -q zupa.zip ./config.json ./dist ./node_modules",
+    "deploy:push": "aws lambda update-function-code --function-name zupa --zip-file fileb://./zupa.zip",
+    "postdeploy": "rm zupa.zip",
+    "pretest": "npm run build",
+    "test": "node tests.js"
   },
   "author": "maciek@spaceapps.pl",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0"
+  },
+  "dependencies": {
+    "moment": "^2.13.0"
+  }
 }
