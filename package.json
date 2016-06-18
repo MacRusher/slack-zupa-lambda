@@ -1,0 +1,12 @@
+{
+  "name": "zupa",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Lambda function for Slack \"zupa\" command",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "aws lambda update-function-code --function-name \"zupa\" --zip-file fileb://./zupa.zip"
+  },
+  "author": "maciek@spaceapps.pl",
+  "license": "MIT"
+}
