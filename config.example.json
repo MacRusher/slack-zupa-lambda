@@ -1,4 +1,9 @@
 {
-  "fbToken": "",
-  "pageId": ""
+  "facebook": {
+    "token": "",
+    "pageId": ""
+  },
+  "slack": {
+    "token": ""
+  }
 }
